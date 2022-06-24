@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FoodCategory;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreFoodCategoriesRequest;
 
 class FoodCategoriesController extends Controller
 {
@@ -12,14 +13,12 @@ class FoodCategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
 
         return view('dashboard_food_categories_index', [
-            'table_categories' => FoodCategory::paginate()
+            'food_categories' => FoodCategory::paginate()
         ]);
-
-        dd($request);
     }
 
     /**
@@ -62,7 +61,10 @@ class FoodCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        return view('dashboard_food_caterory_edit_form', [
+            'food_category' => FoodCategory::find($id),
+        ]);
     }
 
     /**
@@ -72,9 +74,13 @@ class FoodCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreFoodCategoriesRequest $request, $id)
     {
-        //
+
+        // puting validated date to the database 
+        FoodCategory::find($id)->update($request->validated());
+        //redirectig to food category index page / controller: FoodCategoriesController@index
+        return redirect()->route('food_cat.index');
     }
 
     /**
