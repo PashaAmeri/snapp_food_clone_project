@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FoodCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreFoodCategoriesRequest;
+use App\Models\Food;
 
 class FoodCategoriesController extends Controller
 {
@@ -79,7 +80,7 @@ class FoodCategoriesController extends Controller
 
         // puting validated date to the database 
         FoodCategory::find($id)->update($request->validated());
-        //redirectig to food category index page / controller: FoodCategoriesController@index
+        // redirectig to food category index page / controller: FoodCategoriesController@index
         return redirect()->route('food_cat.index');
     }
 
@@ -91,6 +92,10 @@ class FoodCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        // deleting the category record in database
+        FoodCategory::find($id)->delete();
+        // redirectig to food category index page / controller: FoodCategoriesController@index
+        return redirect()->route('food_cat.index');
     }
 }
