@@ -23,11 +23,11 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
-])->group(function () {
+])->prefix('dashboard')->group(function () {
 
-    Route::get('/dashboard', function () {
+    Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::resource('dashboard/food_cat', FoodCategoriesController::class);
+    Route::resource('/food_cat', FoodCategoriesController::class);
 });
