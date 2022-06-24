@@ -11,6 +11,6 @@ class FoodCategory extends Model
 
     protected $fillable = [
         'category_name',
-        'category_decription'
+        'category_description'
     ];
 }
