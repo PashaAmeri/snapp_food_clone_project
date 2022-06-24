@@ -17,7 +17,7 @@ class FoodCategoriesController extends Controller
     public function index()
     {
 
-        return view('dashboard_food_categories_index', [
+        return view('food_category.dashboard_food_categories_index', [
             'food_categories' => FoodCategory::paginate()
         ]);
     }
@@ -30,7 +30,7 @@ class FoodCategoriesController extends Controller
     public function create()
     {
 
-        return view('dashboard_food_caterory_create_form', [
+        return view('food_category.dashboard_food_category_create_form', [
             'categories_name' => FoodCategory::get('category_name')
         ]);
     }
@@ -71,7 +71,7 @@ class FoodCategoriesController extends Controller
     public function edit($id)
     {
 
-        return view('dashboard_food_caterory_edit_form', [
+        return view('food_category.dashboard_food_category_edit_form', [
             'food_category' => FoodCategory::find($id),
         ]);
     }
