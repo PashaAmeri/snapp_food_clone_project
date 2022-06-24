@@ -29,7 +29,10 @@ class FoodCategoriesController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('dashboard_food_caterory_create_form', [
+            'categories_name' => FoodCategory::get('category_name')
+        ]);
     }
 
     /**
@@ -38,9 +41,14 @@ class FoodCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFoodCategoriesRequest $request)
     {
-        //
+
+        // creating new record from validated data
+        FoodCategory::create($request->validated());
+
+        // redirectig to food category index page / controller: FoodCategoriesController@index
+        return redirect()->route('food_cat.index');
     }
 
     /**
