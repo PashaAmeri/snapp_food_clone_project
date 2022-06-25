@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
 use App\Models\FoodCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreFoodCategoriesRequest;
-use App\Models\Food;
+use App\Http\Requests\StoreFoodAndRestaurantCategoriesRequest;
 
 class FoodCategoriesController extends Controller
 {
@@ -41,7 +42,7 @@ class FoodCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFoodCategoriesRequest $request)
+    public function store(StoreFoodAndRestaurantCategoriesRequest $request)
     {
 
         // creating new record from validated data
@@ -83,7 +84,7 @@ class FoodCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreFoodCategoriesRequest $request, $id)
+    public function update(StoreFoodAndRestaurantCategoriesRequest $request, $id)
     {
 
         // puting validated date to the database 
