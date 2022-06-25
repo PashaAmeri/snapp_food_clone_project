@@ -32,8 +32,12 @@ Route::middleware([
 
     Route::resource('/food_cat', FoodCategoriesController::class);
     Route::resource('/restaurant_cat', RestaurantCategoriesController::class);
+    Route::resource('/coupon', RestaurantCategoriesController::class);
 });
 
+
+
+// TODO: restaurant routrs and controller
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
