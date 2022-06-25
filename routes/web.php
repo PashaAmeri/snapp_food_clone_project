@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\FoodCategoriesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FoodCategoriesController;
+use App\Http\Controllers\Admin\RestaurantCategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,5 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource('/food_cat', FoodCategoriesController::class);
+    Route::resource('/restaurant_cat', RestaurantCategoriesController::class);
 });

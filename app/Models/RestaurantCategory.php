@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class RestaurantCategory extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'category_name',
+        'category_description'
+    ];
 }

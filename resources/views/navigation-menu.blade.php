@@ -13,6 +13,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ml-2">
+                   
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                        
@@ -22,10 +23,14 @@
                         {{ __('Food Categories') }}
                        
                     </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('dashboard') . '/restaurant_cat' }}" :active="request()->routeIs('dashboard/restaurant_cat')">
+                        {{ __('Restaurant Categories') }}
+                       
+                    </x-jet-nav-link>
+
                 </div>
             </div>
-
-
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Food;
-use App\Models\FoodCategory;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreFoodCategoriesRequest;
+use App\Models\RestaurantCategory;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFoodAndRestaurantCategoriesRequest;
 
-class FoodCategoriesController extends Controller
+class RestaurantCategoriesController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +18,8 @@ class FoodCategoriesController extends Controller
     public function index()
     {
 
-        return view('food_category.dashboard_food_categories_index', [
-            'food_categories' => FoodCategory::paginate()
+        return view('restaurant_category.dashboard_restaurant_categories_index', [
+            'restaurant_categories' => RestaurantCategory::paginate()
         ]);
     }
 
@@ -31,8 +31,8 @@ class FoodCategoriesController extends Controller
     public function create()
     {
 
-        return view('food_category.dashboard_food_category_create_form', [
-            'categories_name' => FoodCategory::get('category_name')
+        return view('restaurant_category.dashboard_restaurant_category_create_form', [
+            'categories_name' => RestaurantCategory::get('category_name')
         ]);
     }
 
@@ -46,10 +46,10 @@ class FoodCategoriesController extends Controller
     {
 
         // creating new record from validated data
-        FoodCategory::create($request->validated());
+        RestaurantCategory::create($request->validated());
 
-        // redirectig to food category index page / controller: FoodCategoriesController@index
-        return redirect()->route('food_cat.index');
+        // redirectig to restaurant category index page / controller: FoodCategoriesController@index
+        return redirect()->route('restaurant_cat.index');
     }
 
     /**
@@ -72,8 +72,8 @@ class FoodCategoriesController extends Controller
     public function edit($id)
     {
 
-        return view('food_category.dashboard_food_category_edit_form', [
-            'food_category' => FoodCategory::find($id),
+        return view('restaurant_category.dashboard_restaurant_category_edit_form', [
+            'restaurant_category' => RestaurantCategory::find($id),
         ]);
     }
 
@@ -88,9 +88,9 @@ class FoodCategoriesController extends Controller
     {
 
         // puting validated date to the database 
-        FoodCategory::find($id)->update($request->validated());
-        // redirectig to food category index page / controller: FoodCategoriesController@index
-        return redirect()->route('food_cat.index');
+        RestaurantCategory::find($id)->update($request->validated());
+        // redirectig to restaurant category index page / controller: FoodCategoriesController@index
+        return redirect()->route('restaurant_cat.index');
     }
 
     /**
@@ -103,8 +103,8 @@ class FoodCategoriesController extends Controller
     {
 
         // deleting the category record in database
-        FoodCategory::find($id)->delete();
-        // redirectig to food category index page / controller: FoodCategoriesController@index
-        return redirect()->route('food_cat.index');
+        RestaurantCategory::find($id)->delete();
+        // redirectig to restaurant category index page / controller: FoodCategoriesController@index
+        return redirect()->route('restaurant_cat.index');
     }
 }
