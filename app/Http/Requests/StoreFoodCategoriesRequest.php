@@ -30,7 +30,7 @@ class StoreFoodCategoriesRequest extends FormRequest
          */
         return [
             'category_name' => 'required|min:2|max:64',
-            'category_description' => 'required|min:1|max:150',
+            'category_description' => 'required|min:1|max:300',
         ];
     }
 }
