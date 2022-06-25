@@ -16,17 +16,18 @@
                    
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                       
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('dashboard') . '/food_cat' }}" :active="request()->routeIs('dashboard/food_cat')">
                         {{ __('Food Categories') }}
-                       
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('dashboard') . '/restaurant_cat' }}" :active="request()->routeIs('dashboard/restaurant_cat')">
                         {{ __('Restaurant Categories') }}
-                       
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('dashboard') . '/coupon' }}" :active="request()->routeIs('dashboard/restaurant_cat')">
+                        {{ __('Coupons') }}
                     </x-jet-nav-link>
 
                 </div>
