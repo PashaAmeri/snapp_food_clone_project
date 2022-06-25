@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreFoodCategoriesRequest extends FormRequest
+class StoreFoodAndRestaurantCategoriesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,6 +13,7 @@ class StoreFoodCategoriesRequest extends FormRequest
      */
     public function authorize()
     {
+
         return true;
     }
 
@@ -28,6 +29,7 @@ class StoreFoodCategoriesRequest extends FormRequest
          * 
          * food category validations: editing and creating
          */
+
         return [
             'category_name' => 'required|min:2|max:64',
             'category_description' => 'required|min:1|max:300',
