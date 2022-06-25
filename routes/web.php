@@ -33,3 +33,17 @@ Route::middleware([
     Route::resource('/food_cat', FoodCategoriesController::class);
     Route::resource('/restaurant_cat', RestaurantCategoriesController::class);
 });
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->prefix('restaurant')->group(function () {
+
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::resource('/food_cat', FoodCategoriesController::class);
+    Route::resource('/restaurant_cat', RestaurantCategoriesController::class);
+});
