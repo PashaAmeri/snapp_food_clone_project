@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FoodCategoriesController;
 use App\Http\Controllers\Admin\RestaurantCategoriesController;
 
@@ -32,22 +33,23 @@ Route::middleware([
 
     Route::resource('/food_cat', FoodCategoriesController::class);
     Route::resource('/restaurant_cat', RestaurantCategoriesController::class);
-    Route::resource('/coupon', RestaurantCategoriesController::class);
+    Route::resource('/coupon', CouponController::class);
 });
 
 
 
 // TODO: restaurant routrs and controller
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->prefix('restaurant')->group(function () {
 
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->prefix('restaurant')->group(function () {
 
-    Route::resource('/food_cat', FoodCategoriesController::class);
-    Route::resource('/restaurant_cat', RestaurantCategoriesController::class);
-});
+//     Route::get('/', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+
+//     Route::resource('/food_cat', FoodCategoriesController::class);
+//     Route::resource('/restaurant_cat', RestaurantCategoriesController::class);
+// });
