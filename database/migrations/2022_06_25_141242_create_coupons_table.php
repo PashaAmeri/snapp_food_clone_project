@@ -18,11 +18,11 @@ return new class extends Migration
 
             $table->id();
             // The voucher code
-            $table->string('code')->nullable();
+            $table->string('coupon_code')->nullable();
             // The human readable voucher code name
-            $table->string('title');
+            $table->string('coupon_title');
             // The description of the voucher
-            $table->text('description')->nullable();
+            $table->text('coupon_description')->nullable();
             // The number of uses currently
             $table->integer('uses_number')->unsigned()->nullable();
             // The max uses this voucher has
@@ -32,7 +32,7 @@ return new class extends Migration
             // The amount to discount.
             $table->integer('discount_amount');
             // Whether or not the voucher is a percentage or a fixed price. 
-            $table->boolean('is_percentage')->default(true);
+            $table->boolean('is_percentage')->default(false);
             // When the voucher begins
             $table->timestamp('starts_at');
             // When the voucher ends
