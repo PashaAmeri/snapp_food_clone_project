@@ -18,6 +18,8 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
+                    @can('is_admin')
+
                     <x-jet-nav-link href="{{ route('dashboard') . '/food_cat' }}" :active="request()->routeIs('dashboard/food_cat')">
                         {{ __('Food Categories') }}
                     </x-jet-nav-link>
@@ -29,6 +31,20 @@
                     <x-jet-nav-link href="{{ route('dashboard') . '/coupon' }}" :active="request()->routeIs('dashboard/restaurant_cat')">
                         {{ __('Coupons') }}
                     </x-jet-nav-link>
+
+                    @endcan
+
+                    @can('is_seller')
+                    
+                    <x-jet-nav-link href="{{ route('dashboard') . '/orders' }}" :active="request()->routeIs('dashboard/orders')">
+                        {{ __('Orders') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('dashboard') . '/foods' }}" :active="request()->routeIs('dashboard/foods')">
+                        {{ __('Foods') }}
+                    </x-jet-nav-link>
+
+                    @endcan
 
                 </div>
             </div>
