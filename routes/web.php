@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FoodCategoriesController;
+use App\Http\Controllers\Seller\SellerFoodsController;
+use App\Http\Controllers\Seller\SellerOrdersController;
 use App\Http\Controllers\Admin\RestaurantCategoriesController;
 
 /*
@@ -23,17 +25,38 @@ Route::get('/', function () {
 
 Route::middleware([
     'auth:sanctum',
+    'not_user',
     config('jetstream.auth_session'),
     'verified'
 ])->prefix('dashboard')->group(function () {
 
+    // Common routes between users:
+
     Route::get('/', function () {
+
         return view('dashboard');
     })->name('dashboard');
 
-    Route::resource('/food_cat', FoodCategoriesController::class);
-    Route::resource('/restaurant_cat', RestaurantCategoriesController::class);
-    Route::resource('/coupon', CouponController::class);
+    //----------------------------------------------------------
+
+    // Admin routes:
+
+    Route::middleware(['can:is_admin'])->group(function () {
+
+        Route::resource('/food_cat', FoodCategoriesController::class);
+        Route::resource('/restaurant_cat', RestaurantCategoriesController::class);
+        Route::resource('/coupon', CouponController::class);
+    });
+
+    //---------------------------------------------------------
+
+    // seller(Restaurant) routes:
+
+    Route::middleware(['can:is_seller'])->group(function () {
+
+        Route::resource('/orders', SellerOrdersController::class);
+        Route::resource('/foods', SellerFoodsController::class);
+    });
 });
 
 
