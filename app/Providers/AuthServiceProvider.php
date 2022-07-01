@@ -39,6 +39,11 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role === 3;
         });
 
+        Gate::define('is_guest', function () {
+
+            return !(auth()->check());
+        });
+
         $this->registerPolicies();
 
         //
