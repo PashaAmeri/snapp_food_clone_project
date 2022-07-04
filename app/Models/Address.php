@@ -14,6 +14,7 @@ class Address extends Model
         'title',
         'address',
         'latitude',
-        'longitude'
+        'longitude',
+        'is_current'
     ];
 }

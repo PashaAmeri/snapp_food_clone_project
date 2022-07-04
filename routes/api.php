@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthApiController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthApiController;
+use App\Http\Controllers\users\api\AddressController;
+use App\Http\Controllers\users\api\UserViewRestaurants;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,14 @@ Route::post('/login', [AuthApiController::class, 'login']);
 // });
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+
+    // Route::patch('/profile', [AuthApiController::class, 'updatePersonalInfo']);
+
+    Route::get('/addresses', [AddressController::class, 'getUserAddresses']);
+    Route::post('/addresses/{address_id}', [AddressController::class, 'setCurrentAddress'])->whereNumber('id');
+    Route::post('/addresses', [AddressController::class, 'createAddress']);
+
+    // Route::get('/restaurants/{id}', [UserViewRestaurants::class, 'getRestaurantByID']);
+    // Route::get('/restaurants', [UserViewRestaurants::class, 'getRestaurantByID']);
 });

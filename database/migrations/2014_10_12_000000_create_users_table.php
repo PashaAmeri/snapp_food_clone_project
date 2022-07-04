@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Address;
 use App\Models\AppRole;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->string('phone')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->foreignIdFor(Address::class, 'default_address_id')->nullable();
             $table->foreignIdFor(AppRole::class, 'role')->default(3);
             $table->boolean('is_profile_completed')->default(false);
             $table->string('profile_photo_path', 2048)->nullable();
