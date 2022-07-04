@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Cache\Store;
 use App\Http\Requests\LoginApiRequest;
 use App\Http\Requests\StoreRegisterReguest;
+use App\Http\Requests\UpdateRegisterReguest;
 
 class AuthApiController extends Controller
 {
@@ -32,6 +33,27 @@ class AuthApiController extends Controller
             'token' => $token
         ], 201);
     }
+
+    public function updatePersonalInfo(UpdateRegisterReguest $request)
+    {
+
+        $validated_form_data = $request->validated();
+
+        $user = User::where('id', auth()->user()->id)
+            ->update([
+                'name' => $validated_form_data['name'],
+                'email' => $validated_form_data['email'],
+                'phone' => $validated_form_data['phone'],
+            ]);
+
+        $token = $this->createUserToken($user);
+
+        return response([
+            'user' => $user,
+            'token' => $token
+        ], 201);
+    }
+
 
     public function login(LoginApiRequest $request)
     {
