@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\IsSellerCompelitedProfile;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -66,6 +67,7 @@ class Kernel extends HttpKernel
         'not_user' => \App\Http\Middleware\NotUser::class,
         'admin_access' => \App\Http\Middleware\AdminAccess::class,
         'seller_access' => \App\Http\Middleware\SellerAccess::class,
+        'is_seller_compelited_profile' => IsSellerCompelitedProfile::class,
     ];
 
     

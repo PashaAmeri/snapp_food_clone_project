@@ -6,6 +6,7 @@ use App\Http\Controllers\FoodCategoriesController;
 use App\Http\Controllers\Seller\SellerFoodsController;
 use App\Http\Controllers\Seller\SellerOrdersController;
 use App\Http\Controllers\Admin\RestaurantCategoriesController;
+use App\Http\Controllers\Seller\SellerProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,25 +55,12 @@ Route::middleware([
 
     Route::middleware(['can:is_seller'])->group(function () {
 
-        Route::resource('/orders', SellerOrdersController::class);
-        Route::resource('/foods', SellerFoodsController::class);
+        Route::resource('/restaurant_profile', SellerProfileController::class);
+
+        Route::middleware(['is_seller_compelited_profile'])->group(function () {
+
+            Route::resource('/orders', SellerOrdersController::class);
+            Route::resource('/foods', SellerFoodsController::class);
+        });
     });
 });
-
-
-
-// TODO: restaurant routrs and controller
-
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->prefix('restaurant')->group(function () {
-
-//     Route::get('/', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-
-//     Route::resource('/food_cat', FoodCategoriesController::class);
-//     Route::resource('/restaurant_cat', RestaurantCategoriesController::class);
-// });

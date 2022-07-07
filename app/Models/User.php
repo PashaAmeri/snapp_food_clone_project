@@ -59,4 +59,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function addresse()
+    {
+
+        return $this->hasMany(Address::class, 'default_address_id');
+    }
 }

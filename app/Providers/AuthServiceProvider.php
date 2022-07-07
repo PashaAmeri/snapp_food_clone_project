@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Restaurant;
 use App\Policies\AddressPolicy;
 use Faker\Provider\it_CH\Address;
 use Illuminate\Support\Facades\Gate;
@@ -48,7 +49,5 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         $this->registerPolicies();
-
-        //
     }
 }
