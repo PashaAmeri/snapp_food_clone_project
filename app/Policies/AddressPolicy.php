@@ -43,7 +43,8 @@ class AddressPolicy
      */
     public function create(User $user)
     {
-        //
+
+        return $user->role_id === 3 ? Response::allow() : Response::deny('Access denied.');
     }
 
     /**

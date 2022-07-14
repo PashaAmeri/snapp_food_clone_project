@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreAddressesRequest;
 
 class AddressController extends Controller
@@ -16,7 +17,7 @@ class AddressController extends Controller
 
         $create_form_address = $request->validated();
 
-        Address::created([
+        Address::create([
             'user_id' => auth()->user()->id,
             'title' => $create_form_address['title'],
             'address' => $create_form_address['address'],
@@ -36,7 +37,7 @@ class AddressController extends Controller
     public function setCurrentAddress($address_id)
     {
 
-        //TODO: authorize and check if the address exist.
+        // Gate::authorize('update', $address_id);
 
         if ($user = User::find(auth()->user()->id)->first()) {
 
@@ -51,6 +52,8 @@ class AddressController extends Controller
 
     public function getAddressByID($address_id)
     {
+
+        // Gate::authorize('view', $address_id);
 
         return Address::find($address_id);
     }

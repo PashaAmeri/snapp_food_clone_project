@@ -17,4 +17,10 @@ class Address extends Model
         'longitude',
         'is_current'
     ];
+
+    public function userAddress()
+    {
+
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
