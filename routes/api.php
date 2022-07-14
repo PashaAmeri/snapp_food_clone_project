@@ -32,6 +32,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/addresses/{address_id}', [AddressController::class, 'setCurrentAddress'])->whereNumber('id');
     Route::post('/addresses', [AddressController::class, 'createAddress']);
 
-    // Route::get('/restaurants/{id}', [UserViewRestaurants::class, 'getRestaurantByID']);
-    // Route::get('/restaurants', [UserViewRestaurants::class, 'getRestaurantByID']);
+    Route::get('/restaurants/{restaurant_id}', [UserViewRestaurants::class, 'getRestaurantByID']);
+    Route::get('/restaurants', [UserViewRestaurants::class, 'restaurantSearch']);
+    Route::post('/restaurants/{restaurant_id}/foods', [UserViewRestaurants::class, 'restaurantFoods']);
+
+   
 });
