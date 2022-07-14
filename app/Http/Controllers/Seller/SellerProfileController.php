@@ -18,11 +18,9 @@ class SellerProfileController extends Controller
     public function index()
     {
 
-        $restaurant_info = Restaurant::where('user_id', auth()->user()->id)->first();
-
-        return view('seller_profile.dashboard_profile_create_form', [
+        return view('seller_profile.dashboard_profile_index', [
+            'restaurant_info' => Restaurant::where('user_id', auth()->user()->id)->first(),
             'restaurant_category' => RestaurantCategory::all('id', 'category_name'),
-            'resturant_info' => $restaurant_info
         ]);
     }
 
@@ -33,7 +31,10 @@ class SellerProfileController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('seller_profile.dashboard_profile_create_form', [
+            'restaurant_category' => RestaurantCategory::all('id', 'category_name'),
+        ]);
     }
 
     /**
@@ -49,7 +50,7 @@ class SellerProfileController extends Controller
 
         if (Restaurant::where('user_id', auth()->user()->id)->first()) {
 
-            return back();
+            return redirect()->route('dashboard')->with('message', 'You already created your restaurant!');
         }
 
         Restaurant::create([
@@ -96,7 +97,7 @@ class SellerProfileController extends Controller
             ])
         ]);
 
-        return redirect()->route('dashoard');
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -106,7 +107,6 @@ class SellerProfileController extends Controller
      */
     public function show()
     {
-        $id = auth()->user()->id;
     }
 
     /**
@@ -127,9 +127,61 @@ class SellerProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRestaurantInfoRequest $request, $id)
     {
-        //
+
+        if ($id !== auth()->user()->id) {
+
+            return redirect()->route('dashboard')->with('error_message', 'You don\'t have access to this profile!');
+        }
+
+        $form_restaurant_data = $request->validated();
+
+        Restaurant::where('user_id', $id)->create([
+            'user_id' => auth()->user()->id,
+            'restaurant_name' => $form_restaurant_data['restaurant_name'],
+            'restaurant_phone' => $form_restaurant_data['restaurant_phone'],
+            'restaurant_address' => json_encode([
+                'address' => $form_restaurant_data['restaurant_address'],
+                'latitude' => 'todo',
+                'longitude' => 'todo',
+            ]),
+            'restaurant_category_id' => $form_restaurant_data['restaurant_category_id'],
+            'bank_number' => $form_restaurant_data['bank_number'],
+            'restaurant_description' => $form_restaurant_data['restaurant_description'],
+            'schedule' => json_encode([
+                'monday' => [
+                    'start' => $form_restaurant_data['monday_start'] ?? NULL,
+                    'end' =>  $form_restaurant_data['monday_ends'] ?? NULL,
+                ],
+                'tuesday' => [
+                    'start' => $form_restaurant_data['tuesday_start'] ?? NULL,
+                    'end' =>  $form_restaurant_data['tuesday_end'] ?? NULL,
+                ],
+                'wednesday' => [
+                    'start' => $form_restaurant_data['wednesday_start'] ?? NULL,
+                    'end' =>  $form_restaurant_data['wednesday_ends'] ?? NULL,
+                ],
+                'thursday' => [
+                    'start' => $form_restaurant_data['thursday_start'] ?? NULL,
+                    'end' =>  $form_restaurant_data['thursday_ends'] ?? NULL,
+                ],
+                'friday' => [
+                    'start' => $form_restaurant_data['friday_start'] ?? NULL,
+                    'end' =>  $form_restaurant_data['friday_ends'] ?? NULL,
+                ],
+                'saturday' => [
+                    'start' => $form_restaurant_data['saturday_start'] ?? NULL,
+                    'end' =>  $form_restaurant_data['saturday_ends'] ?? NULL,
+                ],
+                'sunday' => [
+                    'start' => $form_restaurant_data['sunday_start'] ?? NULL,
+                    'end' =>  $form_restaurant_data['sunday_ends'] ?? NULL,
+                ],
+            ])
+        ]);
+
+        return redirect()->route('dashboard')->with('message', 'Restuarant profile updated.');
     }
 
     /**
