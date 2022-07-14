@@ -104,7 +104,7 @@
 
             <section>
 
-                <div class="flex w-full gap-10">
+                <div class="flex w-full gap-10 flex-wrap justify-center">
 
                     @forelse ($foods as $food)
 

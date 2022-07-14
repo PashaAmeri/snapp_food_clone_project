@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Seller;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\RestaurantCategory;
+use App\Http\Controllers\Controller;
 
 class SellerOrdersController extends Controller
 {
@@ -15,9 +16,9 @@ class SellerOrdersController extends Controller
     public function index()
     {
 
-        // return view('restaurant_category.dashboard_restaurant_categories_index', [
-        //     'restaurant_categories' => RestaurantCategory::paginate()
-        // ]);
+        return view('seller_orders.orders_index', [
+            'restaurant_categories' => RestaurantCategory::paginate()
+        ]);
     }
 
     /**
