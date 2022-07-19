@@ -32,7 +32,7 @@ class AddressPolicy
     public function view(User $user, Address $address)
     {
 
-        return $user->id === $address->user_id ? Response::allow() : Response::deny('Access denied.');
+        return $user->id === $address->user_id;
     }
 
     /**
@@ -44,7 +44,7 @@ class AddressPolicy
     public function create(User $user)
     {
 
-        return $user->role_id === 3 ? Response::allow() : Response::deny('Access denied.');
+        return $user->role_id === 3;
     }
 
     /**

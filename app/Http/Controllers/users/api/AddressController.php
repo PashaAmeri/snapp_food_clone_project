@@ -15,6 +15,8 @@ class AddressController extends Controller
     public function createAddress(StoreAddressesRequest $request)
     {
 
+        $this->authorize('create', Address::class);
+
         $create_form_address = $request->validated();
 
         Address::create([
@@ -37,7 +39,7 @@ class AddressController extends Controller
     public function setCurrentAddress($address_id)
     {
 
-        // Gate::authorize('update', $address_id);
+        $this->authorize('view', Address::find($address_id));
 
         if ($user = User::find(auth()->user()->id)->first()) {
 
@@ -53,8 +55,8 @@ class AddressController extends Controller
     public function getAddressByID($address_id)
     {
 
-        // Gate::authorize('view', $address_id);
+        $this->authorize('view', $address = Address::find($address_id));
 
-        return Address::find($address_id);
+        return $address;
     }
 }
