@@ -15,7 +15,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('food', function (Blueprint $table) {
+        Schema::create('foods', function (Blueprint $table) {
+
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(FoodCategory::class);
