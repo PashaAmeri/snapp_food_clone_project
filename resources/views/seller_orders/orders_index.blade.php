@@ -1,22 +1,32 @@
 <x-app-layout>
+
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }} / {{ __('Restaurant Categories') }}
-        </h2>
+
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Dashboard') }} / {{ __('Orders') }}
+      </h2>
+
     </x-slot>
 
     <main class="py-12">
-    
+
       <div class="px-10 mx-auto container align-middle space-y-8">
 
         <div class="grid grid-cols-2 gap-2">
+
           <div class="shadow rounded-lg py-3 px-5 bg-white">
+
             <div class="flex flex-row justify-between items-center">
+
               <div>
+
                 <h6 class="text-2xl">Movies viewed</h6>
                 <h4 class="text-black text-4xl font-bold text-left">33</h4>
+
               </div>
+
               <div>
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-12 w-12"
@@ -31,10 +41,15 @@
                     d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
                   />
                 </svg>
+
               </div>
+
             </div>
+
             <div class="text-left flex flex-row justify-start items-center">
+
               <span class="mr-1">
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-6 w-6"
@@ -49,17 +64,28 @@
                     d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
                   />
                 </svg>
+
               </span>
+
               <p><span class="text-teal-500 font-bold">3%</span> in 7 days</p>
+
             </div>
+
           </div>
+
           <div class="shadow rounded-lg py-3 px-5 bg-white">
+
             <div class="flex flex-row justify-between items-center">
+
               <div>
+
                 <h6 class="text-2xl">Serials viewed</h6>
                 <h4 class="text-black text-4xl font-bold text-left">41</h4>
+
               </div>
+
               <div>
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-12 w-12"
@@ -74,10 +100,15 @@
                     d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
                   />
                 </svg>
+
               </div>
+
             </div>
+
             <div class="text-left flex flex-row justify-start items-center">
+
               <span class="mr-1">
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-6 w-6"
@@ -92,19 +123,23 @@
                     d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"
                   />
                 </svg>
+
               </span>
+
               <p><span class="text-red-500 font-bold">12%</span> in 7 days</p>
+
             </div>
+
           </div>
-        
+
         </div>
 
         <div class="flex gap-10 items-center">
 
-          <form class="w-2/3">   
+          <form class="w-full">   
 
             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
-            
+
             <div class="relative">
 
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -113,63 +148,97 @@
 
                 <input type="search" id="default-search" class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Search Mockups, Logos..." required>
                 <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
-            
+
             </div>
 
           </form>
 
-          <span class="font-bold text-xl">OR</span>
-
-          <div>
-            
-            <a href="{{ route('restaurant_cat.create') }}" class="whitespace-nowrap w-full py-3 px-24 rounded-xl border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white">
-              Create Category
-            </a>
-
-          </div>
-
         </div>
 
-
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table class="w-full text-sm text-left text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                  <tr>
-                      <th scope="col" class="px-6 py-3">
-                        Category name
-                      </th>
 
-                      <th scope="col" class="px-6 py-3">
-                          Description
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                          Creation date
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                          <span class="sr-only">Edit</span>
-                      </th>
+          <table class="w-full text-sm text-left text-gray-500">
+
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+
+                  <tr>
+
+                    <th scope="col" class="px-6 py-3">
+                      #
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                      Customer Info
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                      Items
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                      Address
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                      Total
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                      Status
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Edit</span>
+                    </th>
+
                   </tr>
+
               </thead>
+
               <tbody>
-                  @forelse ($restaurant_categories as $category)
-                  
+
+                  @forelse ($orders as $order)
+
                   <tr class="bg-white border-b">
 
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900">
+                    <td class="px-6 py-4">
 
-                        {{ $category->category_name }}
+                      {{ $order['id'] }}
+
+                    </td>
+
+                    <th scope="row" class="px-6 py-4 text-ellipsis max-w-lg flex flex-col">
+
+                        <span><b>Name:</b> {{ $order['customer']['name'] }}</span>
+                        <span><b>Phone:</b> {{ $order['customer']['phone'] }}</span>
 
                     </th>
 
-                    <td class="px-6 py-4 text-ellipsis max-w-lg">
+                    <td class="px-6 py-4 text-ellipsis max-w-lg shrink">
 
-                        {{ $category->category_description }}
+                      @foreach ($order['items'] as $item)
+
+                        <span><b>{{ $loop->iteration }}. </b>{{ $item['name'] }}</span>
+
+                      @endforeach  
 
                     </td>
 
                     <td class="px-6 py-4">
 
-                      {{ $category->created_at }}
+                      {{ $order['customer']['address'] }}
+
+                    </td>
+
+                    <td class="px-6 py-4">
+
+                      ${{ $order['total'] }}
+
+                    </td>
+
+                    <td class="px-6 py-4">
+
+                      <span class="px-5 py-1 rounded-full @if($order['status']['code'] === 3) bg-orange-200 text-orange-900 @elseif($order['status']['code'] === 4) bg-blue-200 text-blue-900 @elseif($order['status']['code'] === 5) bg-purple-200 text-purple-900 @elseif($order['status']['code'] === 6) bg-green-200 text-green-900 @elseif($order['status']['code'] === 1) bg-red-200 text-red-900 @endif">{{ $order['status']['title'] }}</span>
 
                     </td>
 
@@ -177,16 +246,32 @@
 
                       <div class="flex gap-4 justify-end">
 
-                        <a href="{{ route('dashboard') .'/restaurant_cat/' . $category->id }}/edit" class="font-medium text-blue-600">Edit</a>
+                        @if ($order['status']['code'] < 6 and $order['status']['code'] !== 1)
 
-                        <form action="{{ route('restaurant_cat.destroy', $category -> id) }}" method="POST">
+                        <form action="{{ route('orders.update', $order['id']) }}" method="POST">
 
                           @csrf
-                          @method('Delete')
+                          @method('Patch')
 
-                          <button name="cat_id" type="submit" value="{{ $category->id }}" class="font-medium text-red-600">Delete</button>
-                        
+                          <button name="status_code" type="submit" value="{{ $order['status']['code'] + 1 }}" class="font-medium text-blue-600">@if($order['status']['code'] === 3) Accept @else Next @endif</button>
+
                         </form>
+
+                        <form action="{{ route('orders.update', $order['id']) }}" method="POST">
+
+                          @csrf
+                          @method('Patch')
+
+                          <button name="status_code" type="submit" value="1" class="font-medium text-red-600">Refuse</button>
+
+                        </form>
+
+                        @else
+
+                        <span class="font-medium text-gray-600">Done</span>
+                        <span class="font-medium text-gray-600">Refuse</span>
+
+                        @endif
 
                       </div>
 
@@ -198,7 +283,7 @@
                   
                   <tr>
 
-                    <td class="text-center py-10 text-2xl italic" colspan="4">
+                    <td class="text-center py-10 text-2xl italic" colspan="7">
 
                       <span class="block">No orders yet!</span>
                     </td>
@@ -215,11 +300,12 @@
 
         <div>
 
-          {{ $restaurant_categories->links() }}
+          {{-- {{ $orders->links() }} --}}
 
         </div>
 
       </div>
 
     </main>
+
 </x-app-layout>

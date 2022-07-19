@@ -6,6 +6,7 @@ use App\Models\FoodCategory;
 use Illuminate\Database\Seeder;
 use Database\Seeders\AppRoleSeeder;
 use Database\Seeders\FoodCategorySeeder;
+use Database\Seeders\OrdersStatusesSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
             AppRoleSeeder::class,
             FoodCategorySeeder::class,
             UsersSeeder::class,
-            RestaurantCategorySeeder::class
+            RestaurantCategorySeeder::class,
+            OrdersStatusesSeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();

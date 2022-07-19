@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers\Seller;
 
+use App\Models\Cart;
+use App\Models\Food;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\Address;
+use App\Models\CartItem;
+use App\Models\Restaurant;
+use App\Models\OrderStatus;
 use Illuminate\Http\Request;
-use App\Models\RestaurantCategory;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderStatusCodeRequest;
 
 class SellerOrdersController extends Controller
 {
@@ -16,8 +24,50 @@ class SellerOrdersController extends Controller
     public function index()
     {
 
+        $restaurant_id = Restaurant::where('user_id', auth()->user()->id)->first('id');
+        $orders = Cart::where('restaurant_id', $restaurant_id->id)->where('status', '!=', 2)->get();
+
+        $orders_info = [];
+        $foods = [];
+        $total_price = 0;
+
+        foreach ($orders as $order) {
+
+            $user = User::find($order->user_id);
+            $address = Address::find($user->default_address_id);
+            $order_items = CartItem::where('cart_id', $order->id)->get();
+            $status = OrderStatus::find($order->status);
+
+            foreach ($order_items as $item) {
+
+                $food = Food::find($item->food_id);
+
+                $total_price += $food->food_price * $item->count;
+
+                $foods[] = [
+                    'name' => $food->food_name,
+                    'price' => $food->food_price
+                ];
+            }
+
+            $orders_info[] = [
+                'id' => $order->id,
+                'customer' => [
+                    'name' => $user->name,
+                    'phone' => $user->phone,
+                    'address' => $address->address,
+                ],
+                'items' => $foods,
+                'status' => [
+                    'code' => $status->id,
+                    'title' => $status->title
+                ],
+                'total' => $total_price,
+            ];
+        }
+
         return view('seller_orders.orders_index', [
-            'restaurant_categories' => RestaurantCategory::paginate()
+            'orders' => $orders_info
         ]);
     }
 
@@ -71,9 +121,14 @@ class SellerOrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OrderStatusCodeRequest $request, $id)
     {
-        //
+
+        $form_status_code = $request->validated()['status_code'];
+
+        Cart::where('id', $id)->update(['status' => $form_status_code]);
+
+        return back();
     }
 
     /**
