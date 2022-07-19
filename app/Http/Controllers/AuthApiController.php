@@ -23,7 +23,7 @@ class AuthApiController extends Controller
             'email' => $validated_form_data['email'],
             'phone' => $validated_form_data['phone'],
             'password' => bcrypt($validated_form_data['password']),
-            'role' => 3,
+            'role' => 4,
         ]);
 
         $token = $this->createUserToken($user);
