@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthApiController;
+use App\Http\Controllers\Users\api\PayController;
+use App\Http\Controllers\Users\api\CartController;
 use App\Http\Controllers\users\api\AddressController;
 use App\Http\Controllers\users\api\UserViewRestaurants;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +37,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/restaurants', [UserViewRestaurants::class, 'restaurantSearch']);
     Route::post('/restaurants/{restaurant_id}/foods', [UserViewRestaurants::class, 'restaurantFoods']);
 
-   
+    Route::get('/carts', [CartController::class, 'index']);
+    Route::get('/carts/{cart_id}', [CartController::class, 'show']);
+    Route::post('/carts/add', [CartController::class, 'store']);
+    Route::post('/carts/{cart_id}/pay', [PayController::class, 'payCart']);
+    Route::patch('/carts/add', [CartController::class, 'update']);
 });
