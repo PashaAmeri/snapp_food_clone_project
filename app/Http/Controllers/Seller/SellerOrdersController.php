@@ -10,8 +10,11 @@ use App\Models\Address;
 use App\Models\CartItem;
 use App\Models\Restaurant;
 use App\Models\OrderStatus;
+use App\Jobs\OrderStatusJob;
 use Illuminate\Http\Request;
+use App\Mail\SendOrderStatusMail;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\OrderStatusCodeRequest;
 
 class SellerOrdersController extends Controller
@@ -124,11 +127,27 @@ class SellerOrdersController extends Controller
     public function update(OrderStatusCodeRequest $request, $id)
     {
 
-        $form_status_code = $request->validated()['status_code'];
+        if (Cart::where('id', $id)->update(['status' => $request->validated()['status_code']])) {
 
-        Cart::where('id', $id)->update(['status' => $form_status_code]);
+            $mail_to_user = Cart::where('id', $id)
+                ->with([
+                    'cartCustomer' => function ($query) {
 
-        return back();
+                        $query->select(['id', 'name', 'email']);
+                    },
+                    'cartStatus' => function ($query) {
+
+                        $query->select(['id', 'title', 'description']);
+                    }
+                ])->first();
+
+            dispatch(new OrderStatusJob($mail_to_user));
+
+            return redirect()->route('orders.index');
+        }
+
+        // TODO: redirect errors
+        return redirect()->route('orders.index');
     }
 
     /**

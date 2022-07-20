@@ -15,15 +15,15 @@ class Cart extends Model
         'is_paid'
     ];
 
-    public function res()
+    public function cartCustomer()
     {
 
-        return $this->belongsTo(Restaurant::class);
+        return $this->BelongsTo(User::class, 'user_id', 'id');
     }
 
-    public function food()
+    public function cartStatus()
     {
 
-        return $this->hasMany(Food::class);
+        return $this->hasOne(OrderStatus::class, 'id', 'status');
     }
 }
