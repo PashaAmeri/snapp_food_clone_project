@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Cart;
+use App\Models\CartItem;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Restaurant extends Model
 {
     use HasFactory;
+    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
     protected $fillable = [
         'user_id',
@@ -20,4 +23,28 @@ class Restaurant extends Model
         'restaurant_description',
         'schedule',
     ];
+
+    // public function resturantOrders()
+    // {
+
+    //     return $this->hasMany(Cart::class);
+    // }
+
+    public function restaurantComments()
+    {
+
+        return $this->hasManyThrough(Comment::class, Cart::class);
+    }
+
+    public function commentPublisher()
+    {
+
+        return $this->hasManyDeep(User::class, [Cart::class, Comment::class], ['restaurant_id', 'cart_id', 'user_id', 'id']);
+    }
+
+    public function ordersItems()
+    {
+
+        return $this->hasManyDeep(Food::class, [Cart::class, Comment::class, CartItem::class], ['restaurant_id', 'cart_id', 'food_id', 'id']);
+    }
 }

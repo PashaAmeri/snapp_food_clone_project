@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthApiController;
 use App\Http\Controllers\Users\api\PayController;
 use App\Http\Controllers\Users\api\CartController;
 use App\Http\Controllers\users\api\AddressController;
+use App\Http\Controllers\users\api\CommentsController;
 use App\Http\Controllers\users\api\UserViewRestaurants;
 
 /*
@@ -42,4 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/carts/add', [CartController::class, 'store']);
     Route::post('/carts/{cart_id}/pay', [PayController::class, 'payCart']);
     Route::patch('/carts/add', [CartController::class, 'update']);
+
+    Route::get('/comments', [CommentsController::class, 'show']);
+    Route::post('/comments', [CommentsController::class, 'store']);
 });
