@@ -39,17 +39,13 @@ class AddressController extends Controller
     public function setCurrentAddress($address_id)
     {
 
-        $this->authorize('view', Address::find($address_id));
+        $this->authorize('view', Address::findOrFail($address_id));
 
-        if ($user = User::find(auth()->user()->id)->first()) {
+        $user = User::find(auth()->user()->id);
+        $user->default_address_id = $address_id;
+        $user->save();
 
-            $user->default_address_id = $address_id;
-            $user->save();
-
-            return response(['message' => 'Address sets as default.']);
-        }
-
-        return response(['message' => 'Action failed.']);
+        return response(['message' => 'Address sets as default.']);
     }
 
     public function getAddressByID($address_id)

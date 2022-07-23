@@ -44,7 +44,7 @@ class AddressPolicy
     public function create(User $user)
     {
 
-        return $user->role_id === 3;
+        return $user->role === 3;
     }
 
     /**
