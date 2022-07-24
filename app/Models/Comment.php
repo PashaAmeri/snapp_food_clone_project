@@ -16,6 +16,7 @@ class Comment extends Model
         'cart_id',
         'restaurant_id',
         'score',
+        'status',
         'content'
     ];
 
@@ -23,6 +24,12 @@ class Comment extends Model
     {
 
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function commentCart()
+    {
+
+        return $this->belongsTo(Cart::class, 'cart_id', 'id');
     }
 
     public function commentWithCartItems()
@@ -35,5 +42,11 @@ class Comment extends Model
     {
 
         return $this->hasOne(RestaurantCommentAnswer::class, 'reply_to');
+    }
+
+    public function commentStatus()
+    {
+
+        return $this->belongsTo(CommentStatus::class, 'status');
     }
 }

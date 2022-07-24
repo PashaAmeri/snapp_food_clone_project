@@ -44,6 +44,10 @@
                         {{ __('Foods') }}
                     </x-jet-nav-link>
 
+                    <x-jet-nav-link href="{{ route('dashboard') . '/comments' }}" :active="request()->routeIs('dashboard/comments')">
+                        {{ __('Comments') }}
+                    </x-jet-nav-link>
+
                     @endcan
 
                 </div>

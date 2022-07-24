@@ -3,10 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FoodCategoriesController;
+use App\Http\Controllers\Seller\CommentsController;
 use App\Http\Controllers\Seller\SellerFoodsController;
 use App\Http\Controllers\Seller\SellerOrdersController;
 use App\Http\Controllers\Seller\SellerProfileController;
 use App\Http\Controllers\Admin\RestaurantCategoriesController;
+use App\Http\Controllers\Seller\CommentsAnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +63,8 @@ Route::middleware([
 
             Route::resource('/orders', SellerOrdersController::class);
             Route::resource('/foods', SellerFoodsController::class);
+            Route::resource('/comments', CommentsController::class);
+            Route::resource('/reply_comments', CommentsAnswerController::class);
         });
     });
 });

@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             FoodCategorySeeder::class,
             UsersSeeder::class,
             RestaurantCategorySeeder::class,
-            OrdersStatusesSeeder::class
+            OrdersStatusesSeeder::class,
+            CommentsStatusSeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();

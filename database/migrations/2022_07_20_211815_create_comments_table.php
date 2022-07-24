@@ -1,11 +1,12 @@
 <?php
 
 use App\Models\Cart;
-use App\Models\Restaurant;
 use App\Models\User;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Restaurant;
+use App\Models\CommentStatus;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -24,18 +25,12 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Cart::class);
             $table->foreignIdFor(Restaurant::class);
-            $table->unsignedBigInteger('reply_to')->nullable();
+            $table->foreignIdFor(CommentStatus::class, 'status');
 
             $table->text('content');
-            $table->decimal('score', '5');
+            $table->tinyInteger('score');
 
             $table->timestamps();
-        });
-
-        // foreign to id on the same table
-        Schema::table('comments', function (Blueprint $table) {
-
-            $table->foreign('reply_to')->references('id')->on('comments');
         });
     }
 
