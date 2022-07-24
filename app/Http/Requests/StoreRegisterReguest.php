@@ -28,7 +28,7 @@ class StoreRegisterReguest extends FormRequest
         //TODO: creating password rule
 
         return [
-            'name' => 'required|Alpha|min:2|max:64',
+            'name' => 'required|min:2|max:64',
             'phone' => 'required|numeric|unique:users,phone',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:8|max:64'

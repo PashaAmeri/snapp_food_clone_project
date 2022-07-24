@@ -60,6 +60,14 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public $with = ['userRestaurant'];
+
+    public function userRestaurant()
+    {
+
+        return $this->hasOne(Restaurant::class);
+    }
+
     public function addresse()
     {
 

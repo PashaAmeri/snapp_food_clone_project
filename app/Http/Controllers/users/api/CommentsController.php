@@ -42,12 +42,16 @@ class CommentsController extends Controller
             ]);
         }
 
+        // TODO: add comment status default vlue to migration
+        // TODO: fix status field name
+
         Comment::create([
             'user_id' => auth()->user()->id,
             'cart_id' => $cart->id,
             'restaurant_id' => $cart->restaurant_id,
             'score' => $comment_form_data['score'],
-            'content' => $comment_form_data['message']
+            'content' => $comment_form_data['message'],
+            'status' => 2
         ]);
 
         return response([
