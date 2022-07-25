@@ -28,6 +28,10 @@
                         {{ __('Restaurant Categories') }}
                     </x-jet-nav-link>
 
+                    <x-jet-nav-link href="{{ route('dashboard') . '/restaurant_comments' }}" :active="request()->routeIs('dashboard/restaurant_comments')">
+                        {{ __('Comments') }}
+                    </x-jet-nav-link>
+
                     <x-jet-nav-link href="{{ route('dashboard') . '/coupon' }}" :active="request()->routeIs('dashboard/restaurant_cat')">
                         {{ __('Coupons') }}
                     </x-jet-nav-link>

@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Seller;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SellerCommentsRequest;
-use App\Http\Requests\IndexCommentsSearchRequest;
-use App\Models\Food;
 
 class CommentsController extends Controller
 {
@@ -16,44 +14,24 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(IndexCommentsSearchRequest $request)
+    public function index()
     {
 
-        $form_search_date = $request->validated();
+        return view('admin_comments.dashboard_comments_index', [
+            'comments' => Comment::where('status', 1)->with([
+                'commentRestaurant' => function ($query) {
 
-        $comments = Comment::query();
-
-        $comments->where('restaurant_id', auth()->user()->userRestaurant->id)
-            ->with([
-                'commentWithCartItems' => function ($query) {
-
-                    return $query->select(['food_name']);
+                    return $query->select(['id', 'restaurant_name']);
                 },
                 'commentAuthor' => function ($query) {
 
                     return $query->select(['id', 'name']);
                 },
-                'commentReply',
-                'commentStatus',
                 'commentCart' => function ($query) {
 
                     return $query->select(['id']);
                 }
-            ]);
-
-        if (isset($form_search_date['item_id']) and !is_null($form_search_date['item_id'])) {
-
-            $comments->whereRelation('commentWithCartItems', 'foods.id', $form_search_date['item_id']);
-        }
-
-        if (isset($form_search_date['key']) and !is_null($form_search_date['key'])) {
-
-            $comments->where('content', 'LIKE', '%' . $form_search_date['key'] . '%');
-        }
-
-        return view('seller_comments.dashboard_comments_index', [
-            'comments' => $comments->orderBy('created_at', 'DESC')->paginate(),
-            'foods' => Food::where('user_id', auth()->user()->id)->get()
+            ])->paginate()
         ]);
     }
 
@@ -107,12 +85,12 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SellerCommentsRequest $request, $id)
+    public function update($id)
     {
 
-        Comment::where('id', $id)->update(['status' => $request->validated()['status_code']]);
+        Comment::where('id', $id)->update(['status' => 3]);
 
-        return redirect()->route('comments.index');
+        return redirect()->route('restaurant_comments.index');
     }
 
     /**
@@ -123,6 +101,9 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        Comment::where('id', $id)->delete();
+
+        return redirect()->route('restaurant_comments.index');
     }
 }

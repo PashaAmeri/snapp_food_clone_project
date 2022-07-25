@@ -20,6 +20,12 @@ class Comment extends Model
         'content'
     ];
 
+    public function commentRestaurant()
+    {
+
+        return $this->belongsTo(Restaurant::class, 'restaurant_id', 'id');
+    }
+
     public function commentAuthor()
     {
 
