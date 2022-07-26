@@ -28,6 +28,8 @@ Route::post('/login', [AuthApiController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
+    Route::post('/logout', [AuthApiController::class, 'logout']);
+
     // Route::patch('/profile', [AuthApiController::class, 'updatePersonalInfo']);
 
     Route::get('/addresses', [AddressController::class, 'getUserAddresses']);
