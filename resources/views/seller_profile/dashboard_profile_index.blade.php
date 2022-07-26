@@ -1,4 +1,8 @@
 <x-app-layout>
+ 
+  <link href="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.css" rel="stylesheet" type="text/css">
+  <script src="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.js" type="text/javascript"></script>
+
 
   <x-slot name="header">
 
@@ -75,6 +79,11 @@
               @enderror
 
             </div>
+
+            <div id="map" style="width: 600px; height: 450px; background: #eee; border: 2px solid #aaa;"></div>
+
+            <input name="lat" type="hidden" id="lat">
+            <input name="lng" type="hidden" id="lng">
 
             <div class="flex gap-6">
 
@@ -456,5 +465,42 @@
     </div>
 
   </main>
+
+  <script type="text/javascript">
+
+    var lat=35.699739;
+    var lng=51.338097; 
+
+    console.log(document.getElementById("lat").value);
+
+  if(document.getElementById("lat").value)
+    lat=document.getElementById("lat").value;
+  
+  if(document.getElementById("lng").value)
+    lng=document.getElementById("lng").value;
+  
+  // neshan map
+  var myMap = new L.Map('map', {
+      key: 'web.c6616162d7454d039088460c483693bc',
+      maptype: 'dreamy',
+      poi: true,
+      traffic: false,
+      center: [lat, lng],
+      zoom: 14
+  });
+
+  //add marker
+      var stuSplit = L.latLng(lat, lng);
+      var myMarker = new L.Marker(stuSplit, 
+          { 
+              title: 'unselected' ,
+              draggable : true,
+              clickable: true,
+              })
+              .addTo(myMap).on('dragend', (e)=>{
+              document.getElementById("lat").value = e.target.getLatLng().lat;
+              document.getElementById("lng").value = e.target.getLatLng().lng;
+              });
+</script>
 
 </x-app-layout>
