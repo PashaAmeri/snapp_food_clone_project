@@ -43,7 +43,6 @@ class CommentsController extends Controller
         }
 
         // TODO: add comment status default vlue to migration
-        // TODO: fix status field name
 
         Comment::create([
             'user_id' => auth()->user()->id,

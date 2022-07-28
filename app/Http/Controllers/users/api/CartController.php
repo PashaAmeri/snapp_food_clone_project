@@ -78,6 +78,7 @@ class CartController extends Controller
         CartItem::create([
             'cart_id' => $cart_id,
             'food_id' => $food->id,
+            'price' => $food->food_price,
             'count' => $cart_form_data['count']
         ]);
 

@@ -26,4 +26,10 @@ class Cart extends Model
 
         return $this->hasOne(OrderStatus::class, 'id', 'status');
     }
+
+    public function itemsPrice()
+    {
+
+        return $this->hasMany(CartItem::class)->sum('price');
+    }
 }

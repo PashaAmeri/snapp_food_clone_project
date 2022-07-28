@@ -19,6 +19,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Cart::class);
             $table->foreignIdFor(Food::class);
+            $table->integer('price');
             $table->integer('count');
             $table->timestamps();
         });

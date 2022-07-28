@@ -130,6 +130,8 @@ class SellerProfileController extends Controller
     public function update(StoreRestaurantInfoRequest $request, $id)
     {
 
+        dd($request->all());
+
         if ($id !== auth()->user()->id) {
 
             return redirect()->route('dashboard')->with('error_message', 'You don\'t have access to this profile!');
