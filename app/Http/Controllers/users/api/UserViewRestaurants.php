@@ -14,7 +14,7 @@ class UserViewRestaurants extends Controller
     public function getRestaurantByID($restaurant_id)
     {
 
-        $restaurant_info = Restaurant::find($restaurant_id);
+        $restaurant_info = Restaurant::findOrdFail($restaurant_id);
         $restaurant_info->restaurant_address = json_decode($restaurant_info->restaurant_address);
         $restaurant_info->schedule = json_decode($restaurant_info->schedule);
 
@@ -38,6 +38,7 @@ class UserViewRestaurants extends Controller
 
         if (!is_null($request->score)) {
 
+            // TODO: fix scoce issue(change model)
             $query->where('score', '>=', $request->score);
         }
 
@@ -49,7 +50,7 @@ class UserViewRestaurants extends Controller
     public function restaurantFoods($restaurant_id)
     {
 
-        $user = Restaurant::find($restaurant_id)->user_id;
+        $user = Restaurant::findOrFail($restaurant_id)->user_id;
 
         $foods = [];
         $categories = FoodCategory::all('id', 'category_name');

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Attribute;
 use App\Models\Cart;
+use App\Models\Comment;
 use App\Models\CartItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -46,5 +47,11 @@ class Restaurant extends Model
     {
 
         return $this->hasManyDeep(Food::class, [Cart::class, Comment::class, CartItem::class], ['restaurant_id', 'cart_id', 'food_id', 'id']);
+    }
+
+    public function restaurantScore()
+    {
+        
+        return $this-> hasMany(Comment::class);
     }
 }
