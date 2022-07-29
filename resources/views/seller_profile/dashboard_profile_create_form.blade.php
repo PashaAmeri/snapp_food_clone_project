@@ -3,7 +3,7 @@
   <x-slot name="header">
 
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Compelit Your Restaurant Profile') }}
+      {{ __('Compelet Your Restaurant Profile') }}
     </h2>
 
   </x-slot>
