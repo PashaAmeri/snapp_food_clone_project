@@ -33,13 +33,6 @@
     
     <div class="flex gap-20 py-12 px-10 mx-auto container align-middle">
 
-      <div class="flex items-center justify-center">
-
-        <!-- Card -->
-   
-      
-      </div>
-
       <div class="w-1/3 m-auto">
     
         <form action="{{ route('restaurant_cat.store') }}" method="POST">
