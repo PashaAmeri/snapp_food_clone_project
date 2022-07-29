@@ -31,6 +31,8 @@ class CommentsController extends Controller
     public function store(StoreCommentsRequest $request)
     {
 
+        $this->authorize('create', Comment::class);
+
         $comment_form_data = $request->validated();
 
         $cart = Cart::find($comment_form_data['cart_id']);
@@ -38,11 +40,11 @@ class CommentsController extends Controller
         if (!(Comment::where('cart_id', $comment_form_data['cart_id'])->get()->isEmpty())) {
 
             return response([
-                'error' => 'Comment alredy posted on this card'
+                'error' => 'Comment alredy posted on this card!'
             ]);
         }
 
-        // TODO: add comment status default vlue to migration
+        // TODO: remove status from create
 
         Comment::create([
             'user_id' => auth()->user()->id,
@@ -66,6 +68,8 @@ class CommentsController extends Controller
      */
     public function show(CommentsShowRequest $request)
     {
+
+        $this->authorize('view', Comment::class);
 
         $comments = Comment::where('restaurant_id', $request->validated()['restaurant_id'])
             ->with([
