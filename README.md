@@ -2,7 +2,7 @@
 # Snapp Food Clone
 
 #### Get Start:
-##### Follow the instructions below on coomandline
+##### Follow the instructions below on commandline
 
 1. composer update 
 2. composer dump-autoload 
