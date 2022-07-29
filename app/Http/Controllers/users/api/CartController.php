@@ -20,6 +20,8 @@ class CartController extends Controller
     public function index()
     {
 
+        $this->authorize('view', Cart::class);
+
         $carts = Cart::where('user_id', auth()->user()->id)->get();
 
         foreach ($carts as $cart) {
@@ -65,6 +67,8 @@ class CartController extends Controller
     public function store(StoreCartRequest $request)
     {
 
+        $this->authorize('create', Cart::class);
+
         $cart_form_data = $request->validated();
 
         $food = Food::find($cart_form_data['food_id']);
@@ -96,6 +100,8 @@ class CartController extends Controller
      */
     public function show($id)
     {
+
+        $this->authorize('viwe', Cart::class);
 
         $cart = Cart::findOrFail($id)->where('is_paid', false);
 
@@ -140,6 +146,8 @@ class CartController extends Controller
      */
     public function update(StoreCartRequest $request, $id)
     {
+
+        $this->authorize('update', Cart::class);
 
         $cart_form_data = $request->validated();
 
