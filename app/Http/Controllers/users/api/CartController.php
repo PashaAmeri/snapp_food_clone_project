@@ -101,7 +101,7 @@ class CartController extends Controller
     public function show($id)
     {
 
-        $this->authorize('viwe', Cart::class);
+        $this->authorize('view', Cart::class);
 
         $cart = Cart::findOrFail($id)->where('is_paid', false);
 
