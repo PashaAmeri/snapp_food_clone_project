@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->foreignIdFor(Address::class, 'default_address_id')->nullable();
-            $table->foreignIdFor(AppRole::class, 'role')->default(3);
+            $table->foreignIdFor(AppRole::class, 'role')->default(4);
             $table->boolean('is_profile_completed')->default(false);
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamp('email_verified_at')->nullable();
