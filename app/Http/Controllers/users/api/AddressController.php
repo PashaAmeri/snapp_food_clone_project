@@ -51,7 +51,7 @@ class AddressController extends Controller
     public function getAddressByID($address_id)
     {
 
-        $this->authorize('view', $address = Address::find($address_id));
+        $this->authorize('view', $address = Address::findOrFail($address_id));
 
         return $address;
     }

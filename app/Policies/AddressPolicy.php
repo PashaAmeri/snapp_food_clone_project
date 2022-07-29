@@ -44,7 +44,7 @@ class AddressPolicy
     public function create(User $user)
     {
 
-        return $user->role === 3;
+        return $user->role === 4;
     }
 
     /**
@@ -57,7 +57,7 @@ class AddressPolicy
     public function update(User $user, Address $address)
     {
 
-        return dd($user->id === $address->user_id ? Response::allow() : Response::deny('Access denied.'));
+        return $user->id === $address->user_id ? Response::allow() : Response::deny('Access denied.');
     }
 
     /**
@@ -94,6 +94,7 @@ class AddressPolicy
      */
     public function forceDelete(User $user, Address $address)
     {
-        //
+
+        return $user->id === $address->user_id ? Response::allow() : Response::deny('Access denied.');
     }
 }
