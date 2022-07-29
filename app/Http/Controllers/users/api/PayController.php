@@ -11,6 +11,8 @@ class PayController extends Controller
     public function payCart($cart_id)
     {
 
+        $this->authorize('update', Cart::class);
+
         $cart = Cart::findOrFail($cart_id);
         $cart->status = 3;
         $cart->save();
