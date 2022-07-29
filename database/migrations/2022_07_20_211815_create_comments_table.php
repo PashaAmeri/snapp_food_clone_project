@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Cart::class);
             $table->foreignIdFor(Restaurant::class);
-            $table->foreignIdFor(CommentStatus::class, 'status');
+            $table->foreignIdFor(CommentStatus::class, 'status')->default(2);
 
             $table->text('content');
             $table->tinyInteger('score');
