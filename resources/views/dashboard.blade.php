@@ -9,6 +9,8 @@
 
       <div class="px-10 mx-auto container align-middle">
 
+        @can('is_admin')
+
         <div class="mb-4">
 
             <form action="{{ route('dashboard') }}" method="GET">
@@ -212,6 +214,8 @@
           </div>
 
         </div>
+
+        @endcan
   
       </div>
 

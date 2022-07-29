@@ -57,12 +57,12 @@
                         <div
                             class="max-w-xs min-w-x rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer bg-white">
 
-                            <div>
+                            {{-- <div>
 
                                 <img src="https://media.ldlc.com/r1600/ld/products/00/05/82/02/LD0005820208_1.jpg"
                                     alt="" />
 
-                            </div>
+                            </div> --}}
 
                             <div class="py-4 px-4">
 

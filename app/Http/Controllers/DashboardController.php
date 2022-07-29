@@ -47,9 +47,9 @@ class DashboardController extends Controller
 
         $past_period_order_count = Cart::where('status', 6)->where('created_at', '>=', Carbon::now()->subDays(($form_fillter_data['period'] ?? 30) * 2)->toDateTimeString())->count();
 
-        $income = Cart::where('status', 6)->with('itemsPrice')->get();
+        // $income = Cart::where('status', 6)->with('itemsPrice')->get();
 
-        dd($income);
+        // dd($income);
 
         return [
             'period' => $period,
@@ -64,7 +64,7 @@ class DashboardController extends Controller
                 'growth' => $past_period_order_count === 0 ? 0 : ($past_period_order_count - $new_orders) / $past_period_order_count * 100
             ],
             'income' => [
-                'total' => dd(Cart::where('status', 6)->sum()),
+                'total',
                 'new',
                 'growth'
             ]
